@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const app = express();
 
 require("dotenv-flow").config();
@@ -7,6 +8,9 @@ require("dotenv-flow").config();
 // import product routes
 const catRoutes = require("./routes/cat");
 const dogRoutes = require("./routes/dog");
+
+app.use(express.json());
+app.use(bodyParser.json());
 
 mongoose.connect(
     process.env.DBHOST,
