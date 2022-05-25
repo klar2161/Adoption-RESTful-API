@@ -1,0 +1,26 @@
+{
+  "name": "adoption-restful-api",
+  "version": "1.0.0",
+  "description": "MongoDB-ExpressJS-NodeJS-RestfulAPI",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "express",
+    "nodejs",
+    "restapi"
+  ],
+  "author": "KlaraN",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0",
+    "mongoose": "^6.3.4"
+  }
+}
