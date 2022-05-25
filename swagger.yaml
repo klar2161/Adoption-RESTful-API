@@ -147,7 +147,7 @@ paths:
               $ref: "#/components/schemas/Cat"
 
       responses:
-        201:
+        200:
           description: Cat created succesfully
           content:
             application/json:
@@ -195,7 +195,7 @@ paths:
               $ref: "#/components/schemas/Cat"
 
       responses:
-        201:
+        200:
           description: Cat updated succesfully
           content:
             application/json:
@@ -216,7 +216,7 @@ paths:
             type: string      
 
       responses:
-        201:
+        200:
           description: Cat deleted succesfully
           content:
             application/json:
@@ -251,7 +251,7 @@ paths:
               $ref: "#/components/schemas/Dog"
 
       responses:
-        201:
+        200:
           description: Dog created succesfully
           content:
             application/json:
@@ -299,7 +299,7 @@ paths:
               $ref: "#/components/schemas/Dog"
 
       responses:
-        201:
+        200:
           description: Dog updated succesfully
           content:
             application/json:
@@ -320,7 +320,7 @@ paths:
             type: string      
 
       responses:
-        201:
+        200:
           description: Dog deleted succesfully
           content:
             application/json:

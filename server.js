@@ -22,6 +22,17 @@ const authRoutes = require("./routes/auth");
 app.use(express.json());
 //app.use(bodyParser.json());
 
+//connect to the MongoDB using Mongoose ODM
+mongoose.connect
+(
+    process.env.DBHOST,
+    {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    }
+).catch(error => console.log("Error connecting to MongoDB:" + error));
+
+mongoose.connection.once('open', () => console.log("Connected succesfully to the MongoDB"));
 
 //routes
 app.get("/api/welcome", (req, res) => {
@@ -40,14 +51,6 @@ app.listen(PORT, function() {
     console.log("Server is running on port: " + PORT)
 })
 
-//connect to the MongoDB using Mongoose ODM
-mongoose.connect(
-    process.env.DBHOST,
-    {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    }
-).catch(error => console.log('Error connecting to MongoDB' + error));
-mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
+
 
 module.exports = app;
