@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const dog = require("../models/dog");
+const { verifyToken } = require("../validation");
 //const NodeCache = require('node-cache');
 // stdTTL is the default time-to-live for each cache entry
 //const cache = new NodeCache({ stdTTL: 600 });
@@ -7,7 +8,7 @@ const dog = require("../models/dog");
 // CRUD operations
 
 // Create dog post (post)
-router.post("/", (req, res) => {
+router.post("/", verifyToken, (req, res) => {
   data = req.body;
 
   dog
@@ -67,7 +68,7 @@ router.get("/:id", (req, res) => {
 });
 
 // Update specific dog post (put)
-router.put("/:id", (req, res) => {
+router.put("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id;
     dog.findByIdAndUpdate(id, req.body)
@@ -84,7 +85,7 @@ router.put("/:id", (req, res) => {
         })
 });
 // Delete specific dog post (delete)
-router.delete("/:id",  (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id;
     dog.findByIdAndDelete(id)

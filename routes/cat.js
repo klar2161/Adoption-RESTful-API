@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const cat = require("../models/cat");
+const { verifyToken } = require("../validation");
 //const NodeCache = require('node-cache');
 // stdTTL is the default time-to-live for each cache entry
 //const cache = new NodeCache({ stdTTL: 600 });
@@ -7,7 +8,7 @@ const cat = require("../models/cat");
 // CRUD operations
 
 // Create cat post (post)
-router.post("/", (req, res) => {
+router.post("/", verifyToken, (req, res) => {
   data = req.body;
 
   cat.insertMany(data)
@@ -64,7 +65,7 @@ router.get("/:id", (req, res) => {
 });
 
 // Update specific cat post (put)
-router.put("/:id", (req, res) => {
+router.put("/:id", verifyToken, (req, res) => {
   const id = req.params.id;
   cat.findByIdAndUpdate(id, req.body)
     .then((data) => {
@@ -88,7 +89,7 @@ router.put("/:id", (req, res) => {
     });
 });
 // Delete specific cat post (delete)
-router.delete("/:id",  (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id;
     cat.findByIdAndDelete(id)
