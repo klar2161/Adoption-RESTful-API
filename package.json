@@ -26,6 +26,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.4",
-    "nodemon": "^2.0.16"
+    "node-cache": "^5.1.2",
+    "nodemon": "^2.0.16",
+    "swagger-ui-express": "^4.4.0",
+    "yamljs": "^0.3.0"
   }
 }

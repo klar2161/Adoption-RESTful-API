@@ -1,0 +1,328 @@
+openapi: 3.0.0
+info:
+  title: Adoption Website
+  description: This is a sample server for an adoption website made with MongoDB, ExpressJS and NodeJS.
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000/api/
+    description: Localhost development server 
+ # - url: https://klar2161-nodejs.herokuapp.com/api/
+   # description: Heroku remote server 
+components:
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: auth-token
+
+  schemas:
+    Cat:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        breed:
+          type: string
+        age:
+          type: string
+        gender:
+          type: string
+        suitableForKids:
+          type: boolean
+        suitableInApartment:
+          type: boolean
+
+    Dog:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        breed:
+          type: string
+        age:
+          type: string
+        gender:
+          type: string
+        suitableForKids:
+          type: boolean
+        suitableInApartment:
+          type: boolean
+    
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        date:
+          type: string
+
+paths:
+
+  /user/register:
+    post:
+      summary: Register a new User
+      description: Register a new User in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+
+      responses:
+        200:
+          description: User created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  _id:
+                    type: string
+
+  /user/login:
+    post:
+      summary: Login a User
+      description: Login a User in order to get JWT token (auth-token)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      
+      responses:
+        200:
+          description: User logged in succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  data:
+                    type: string
+
+
+  /cats:
+    get:
+      summary: Retrieves a list of Cats
+      description: Retrieves a list of cats as JSON objects.
+      responses:
+        200:
+          description: A list of cat JSON objects in an array.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cat"
+    
+    post:
+      summary: Create a new Cat
+      description: Create a new Cat
+      security:
+        - ApiKeyAuth: []      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cat"
+
+      responses:
+        201:
+          description: Cat created succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+  
+  /cats/{id}:
+    get:
+      summary: Specific Cat
+      description: Retrieves a specific Cat based on it id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      responses:
+        200:
+          description: A Cat in the format of a JSON object.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cat"
+   
+    put:
+      summary: Updates a specific Cat
+      description: Updates a specific Cat based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cat"
+
+      responses:
+        201:
+          description: Cat updated succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+
+    delete:
+      summary: Deletes a specific Cat
+      description: Deletes a specific Cat based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string      
+
+      responses:
+        201:
+          description: Cat deleted succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+
+
+  /dogs:
+    get:
+      summary: Retrieves a list of all Dogs
+      description: Retrieves a list of dogs as JSON objects.
+      responses:
+        200:
+          description: A list of dog JSON objects in an array.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dog"
+    
+    post:
+      summary: Create a new Dog
+      description: Create a new Dog
+      security:
+        - ApiKeyAuth: []      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dog"
+
+      responses:
+        201:
+          description: Dog created succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dog"
+  
+  /dogs/{id}:
+    get:
+      summary: Specific Dog
+      description: Retrieves a specific Dog based on it id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      responses:
+        200:
+          description: A Dog in the format of a JSON object.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dog"
+   
+    put:
+      summary: Updates a specific Dog
+      description: Updates a specific Dog based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dog"
+
+      responses:
+        201:
+          description: Dog updated succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dog"
+
+    delete:
+      summary: Deletes a specific Dog
+      description: Deletes a specific Dog based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string      
+
+      responses:
+        201:
+          description: Dog deleted succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dog"

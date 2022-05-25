@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const cat = require("../models/cat");
 const { verifyToken } = require("../validation");
-//const NodeCache = require('node-cache');
+const NodeCache = require('node-cache');
 // stdTTL is the default time-to-live for each cache entry
-//const cache = new NodeCache({ stdTTL: 600 });
+const cache = new NodeCache({ stdTTL: 600 });
 
 // CRUD operations
 
@@ -13,7 +13,7 @@ router.post("/", verifyToken, (req, res) => {
 
   cat.insertMany(data)
     .then((data) => {
-      //cache.flushAll(); //our cache has invalid data now, so we flush it to force rebuild.
+      cache.flushAll(); //our cache has invalid data now, so we flush it to force rebuild.
       res.status(200).send(data);
     })
     .catch((err) => {
