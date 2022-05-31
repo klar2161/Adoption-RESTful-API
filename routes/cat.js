@@ -67,7 +67,7 @@ router.get("/:id", (req, res) => {
 // Update specific cat post (put)
 router.put("/:id", verifyToken, (req, res) => {
   const id = req.params.id;
-  cat.findByIdAndUpdate(id, req.body)
+  cat.findByIdAndUpdate(id, req.body, {new:true})
     .then((data) => {
       if (!data) {
         res
@@ -79,7 +79,7 @@ router.put("/:id", verifyToken, (req, res) => {
               ". Maybe the post was not found!",
           });
       } else {
-        res.send({ message: "Cat post was successfully updated." });
+        res.send(data);
       }
     })
     .catch((err) => {
