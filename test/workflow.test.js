@@ -53,7 +53,7 @@ describe('GET all cat posts', () => {
       });
     
 
-describe("User workflow tests", () => {
+describe("User workflow tests + CRUD tests", () => {
   it("should register + login a user, create cat post and verify 1 in DB", (done) => {
     // 1) Register new user
     let user = {
