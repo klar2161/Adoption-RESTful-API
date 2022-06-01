@@ -40,7 +40,7 @@ describe("Cat user workflow tests + CRUD tests", () => {
     });
    
  
-  it("should register + login a user, create cat post and verify 1 in DB", (done) => {
+  it("Test verify one post in DB - should register + login a user, create cat post and verify 1 in DB", (done) => {
     // 1) Register new user
     let user = {
       name: "Tereza Sulc",
